@@ -4,6 +4,8 @@
 Basic harvester performance\
 `getTransactions.sh`\
 Using the RPC server, export transactions from a wallet to a csv file.
+`tail.sh`\
+Tails the logs for harvester activity, adjusted display order and colors.
 
 ### farmStats.sh
 In a command line, run `./farmStats.sh` to automatically parse the latest log file.\
@@ -22,3 +24,10 @@ have more than that, change the `end` parameter in the script.\
 Currently there is a limitation in the API or possibly in the database that prevents the API\
 from reporting send transactions from before approximately block-height 800000, which is\
 approximately the time of the release of chia client 1.2.6.
+
+### tail.sh
+In a command line, run `./tail.sh <coin name>` to start tailing the logs for chia or any fork.\
+The `<coin name>` will need to be the same as the root directory for the coin's log path, so \
+for chia, the root path is `~/.chia` sot he command to tail the chia logs is `./tail.sh chia`.
+The default coloring is set at anything under 0.5s lookup green, 0.5s to 1s orange/yellow, and/
+over 1s is red. Adjust these times by changing what `$16` is greater than in the script.
