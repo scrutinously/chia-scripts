@@ -27,7 +27,7 @@ approximately the time of the release of chia client 1.2.6.
 
 ### tail.sh
 In a command line, run `./tail.sh <coin name>` to start tailing the logs for chia or any fork.\
-The `<coin name>` will need to be the same as the root directory for the coin's log path, so \
-for chia, the root path is `~/.chia` sot he command to tail the chia logs is `./tail.sh chia`.
+The `<coin name>` will need to be the same as the root directory for the coin's log path. For \
+chia, the root path is `~/.chia` so the command to tail the chia logs is `./tail.sh chia`.
 The default coloring is set at anything under 0.5s lookup green, 0.5s to 1s orange/yellow, and/
 over 1s is red. Adjust these times by changing what `$16` is greater than in the script.
