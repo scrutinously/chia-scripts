@@ -8,7 +8,7 @@ now=$(date +%T)
 today=$(date +%F)
 past24=$(date +%F -d "yesterday")
 
-subslots=$(cat ~/.chia/mainnet/log/debug.log.1 ~/.chia/mainnet/log/debug.log |\
+subslots=$(cat ${logFile}.1 ${logFile} |\
 awk -v now=$now -v today=$today -v past24=$past24 '{FS="T"}; {if ($1 ~ today || $1 ~ past24 && $2 >= now) {print}}'|\
 awk '/64\/64/ {print}' | wc -l)
 if [ ${subslots} > 141 ]; then
