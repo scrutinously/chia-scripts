@@ -9,8 +9,9 @@ Tails the logs for harvester activity, adjusted display order and colors.
 
 ### farmStats.sh
 In a command line, run `./farmStats.sh` to automatically parse the latest log file.\
-To parse all of the existing log files in the mainnet/logs directory, change `debug.log`\
-to `debug.log.*`.
+If your logs are not in the default home directory location, edit the `logFile` path.
+
+To use in Windows as-is, install https://git-scm.com/download/win
 
 ### getTransactions.sh
 In a command line, run `./getTransactions.sh` and follow the prompts:\
