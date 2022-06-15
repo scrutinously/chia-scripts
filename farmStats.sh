@@ -1,14 +1,14 @@
 #!/usr/bin/bash
 logFile="$HOME/.chia/mainnet/log/debug.log"
-eligible=( $(awk '/plots were/ {printf "%d %s %s/\n",$5,$6,$8}' $logFile | sort -n | uniq -c) )
-lookup=( $(awk '/plots were/ {printf "%f/\n",$16}' $logFile) )
+eligible=( $(awk '/plots were/ {printf "%d %s %s/\n",$5,$6,$8}' "${logFile}" | sort -n | uniq -c) )
+lookup=( $(awk '/plots were/ {printf "%f/\n",$16}' "${logFile}") )
 total=$(echo ${eligible[@]} | awk 'BEGIN {RS = "/"}; {sum+=$1} END {print sum}')
 
 now=$(date +%T)
 today=$(date +%F)
 past24=$(date +%F -d "yesterday")
-if [ -f ${logFile}.1 ]; then
-	subslots=$(cat ${logFile}.1 ${logFile} |\
+if [ -f "${logFile}".1 ]; then
+	subslots=$(cat "${logFile}".1 "${logFile}" |\
 	awk -v now=$now -v today=$today -v past24=$past24 '{FS="T"}; {if ($1 ~ today || $1 ~ past24 && $2 >= now) {print}}'|\
 	awk '/64\/64/ {print}' | wc -l)
 	if [ ${subslots} > 141 ]; then
@@ -26,6 +26,6 @@ echo ${lookup[@]} | awk 'BEGIN {RS = "/"}; $1>max{max=$1}; END {printf "%-16s %1
 echo "------------Warning------------"
 awk '/WARNING/ {if ($7 ~ /handshake/ || $11 ~ /peername/ || $7 ~ /104/ || $7 ~ /32/ || $10 ~ /transport/ || $6 ~ /Incompatible/ || $6 ~ /Banning/) i++ c++;
         else if ($5 ~ /Block/) if ($8 > 4) lbv++ bv++ c++;else bv++ c++; else c++}; # I check for block validation time >4s to know when to vacuum my DB
-        END {printf "%s%15d\n%s%4d\n%s%14d\n%s%11d\n","Total Warnings: ",c,"Block Validation Warnings: ",bv,"Validation > 4s: ",lbv,"Ignorable Warnings: ",i}' $logFile
+        END {printf "%s%15d\n%s%4d\n%s%14d\n%s%11d\n","Total Warnings: ",c,"Block Validation Warnings: ",bv,"Validation > 4s: ",lbv,"Ignorable Warnings: ",i}' "${logFile}"
 echo "-------------Error-------------"
-awk '/ERROR/ {if (/pooling/) p++ c++; else {c++}}; END {printf "%s%17d\n%s%15d\n","Total Errors: ",c,"Pooling Errors: ",p}' $logFile
+awk '/ERROR/ {if (/pooling/) p++ c++; else {c++}}; END {printf "%s%17d\n%s%15d\n","Total Errors: ",c,"Pooling Errors: ",p}' "${logFile}"
