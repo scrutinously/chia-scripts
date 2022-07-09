@@ -5,7 +5,7 @@ Basic harvester performance\
 `getTransactions.sh`\
 Using the RPC server, export transactions from a wallet to a csv file.\
 `tail.sh`\
-Tails the logs for harvester activity, adjusted display order and colors.
+Tails the logs for harvester activity, adjusted display order and colors.\
 `puzhash.py`\
 Convert a hex puzzlehash to an address, or an addresses to a hex puzzlehash.
 
