@@ -6,6 +6,8 @@ Basic harvester performance\
 Using the RPC server, export transactions from a wallet to a csv file.\
 `tail.sh`\
 Tails the logs for harvester activity, adjusted display order and colors.
+`puzhash.py`\
+Convert a hex puzzlehash to an address, or an addresses to a hex puzzlehash.
 
 ### farmStats.sh
 In a command line, run `./farmStats.sh` to automatically parse the latest log file.\
@@ -32,3 +34,12 @@ The `<coin name>` will need to be the same as the root directory for the coin's 
 chia, the root path is `~/.chia` so the command to tail the chia logs is `./tail.sh chia`.
 The default coloring is set at anything under 0.5s lookup green, 0.5s to 1s orange/yellow, and/
 over 1s is red. Adjust these times by changing what `$16` is greater than in the script.
+
+### puzhash.py
+Requires python. Run with `python puzhash.py -h` for help dialogue. To convert puzzlehash to\
+address (puzzlehash can be raw hex or start with "0x"): `python puzhash.py -i <hash> -p <prefix>`\
+To convert address to puzzlehash: `python puzhash.py -a <address>`. Example:
+```
+$ python puzhash.py -i 0xe2ece3e617b145feb9e7bba02dd41161ee40f38ea30f32d54926494477bc8851 -p nft
+nft1utkw8eshk9zlaw08hwszm4q3v8hypuuw5v8n942fyey5gaau3pgsjt9vt0
+```
